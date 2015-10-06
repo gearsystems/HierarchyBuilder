@@ -1,0 +1,25 @@
+<html>
+	<h1>View Structure</h1>
+	<div id="container"></div>
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>  
+	<script type='text/javascript'>  
+    google.load('visualization', '1', {packages:['orgchart']});  
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {  
+     var data = new google.visualization.DataTable();  
+     data.addColumn('string', 'Node');  
+     data.addColumn('string', 'Parent');
+     var employee_urls = new Array();
+     {% for employee in object_list %}
+     	employee_urls.push("{{employee.get_absolute_url}}");
+     	data.addRow(['{{employee}}', '{{employee.parent}}'=='None'?'':'{{employee.parent}}']);
+	 {% endfor %} 
+     var chart = new google.visualization.OrgChart(document.getElementById('container'));
+     chart.draw(data);
+     google.visualization.events.addListener(chart, 'select', function(e) {
+            var selection = chart.getSelection();
+            window.open(employee_urls[selection[0].row]);
+        });
+    }
+   </script> 
+</html>
