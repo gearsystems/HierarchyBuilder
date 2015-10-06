@@ -4,3 +4,6 @@
 #Ignore all pyc files
 *.pyc
 venv/*
+
+# Settings file
+OrganizationTree/settings.py
