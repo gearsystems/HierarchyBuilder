@@ -1,0 +1,6 @@
+#Ignore the DS Store file
+.DS_Store
+
+#Ignore all pyc files
+*.pyc
+venv/*
